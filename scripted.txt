@@ -1,0 +1,12 @@
+# GetInfo: Type=Tracks
+NewMonoTrack:
+Select: Track=0 TrackCount=1 Start=0 End=0.5
+#SetTrack: Selected=1
+Select: 
+##Tone: Frequency=600 Duration=100
+Chirp: StartFreq=600 EndFreq=600 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+
+NewMonoTrack:
+Select: Track=1 TrackCount=1 Start=0 End=0.5
+Chirp: StartFreq=900 EndFreq=900 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+Select: Track=1 TrackCount=1 Start=0 End=0.5
