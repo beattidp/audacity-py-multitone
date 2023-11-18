@@ -75,7 +75,7 @@ import threading
 import time
 import errno
 import argparse
-
+from locale import getencoding
 
 if sys.version_info[0] < 3 and sys.version_info[1] < 7:
     sys.exit('PipeClient Error: Python 2.7 or later required')
@@ -139,7 +139,7 @@ class PipeClient():
         self._start_time = 0
         self._write_pipe = None
         self.reply = ''
-        self.enc = enc
+        self.enc = enc if enc else getencoding()
         if not self._write_pipe:
             self._write_thread_start()
         self._read_thread_start()
@@ -158,11 +158,8 @@ class PipeClient():
 
     def _write_pipe_open(self):
         """Open _write_pipe."""
-        if self.enc:
-            self._write_pipe = open(WRITE_NAME, 'w', newline='',
+        self._write_pipe = open(WRITE_NAME, 'w', newline='',
                                     encoding=self.enc)
-        else:
-            self._write_pipe = open(WRITE_NAME, 'w', newline='')
 
     def _read_thread_start(self):
         """Start read_pipe thread."""
@@ -208,10 +205,7 @@ class PipeClient():
         # Thread will wait at this read until it connects.
         # Connection should occur as soon as _write_pipe has connected.
         read_pipe = None
-        if self.enc:
-            read_pipe = open(READ_NAME, 'r', newline='', encoding=self.enc)
-        else:
-            read_pipe = open(READ_NAME, 'r', newline='')
+        read_pipe = open(READ_NAME, 'r', newline='', encoding=self.enc)
         message = ''
         pipe_ok = True
         while pipe_ok:
