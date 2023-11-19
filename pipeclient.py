@@ -167,7 +167,7 @@ class PipeClient():
         read_thread.daemon = True
         read_thread.start()
 
-    def write(self, command, timer=False):
+    def write(self, command, timer=True):
         """Write a command to _write_pipe.
 
         Parameters
@@ -183,7 +183,7 @@ class PipeClient():
 
         """
         self.timer = timer
-        print('Sending command:', command)
+        print(f'Sending command: {command}', file=sys.stderr)
         self._write_pipe.write(command + EOL)
         # Check that read pipe is alive
         if PipeClient.reader_pipe_broken.isSet():
@@ -270,7 +270,7 @@ def main():
     args = parser.parse_args()
 
     if args.docs:
-        print(__doc__)
+        print(__doc__, file=sys.stderr)
         sys.exit(0)
 
     client = PipeClient(enc=args.pipe_encoding)
@@ -293,7 +293,7 @@ def main():
                     reply = 'PipeClient: Reply timed-out.'
                 else:
                     reply = client.read()
-            print(reply)
+            print(reply,file=sys.stderr)
 
 
 if __name__ == '__main__':
