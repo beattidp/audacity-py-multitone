@@ -1,0 +1,12 @@
+{# no comment ... #}
+{% for iteration in tone_data -%}
+    {% set outer_index0 = loop.index0 %}
+# Begin sequence {{ iteration.mixed_track }}, Destination Output Track --------
+    {% for track in iteration.chirps %}
+NewMonoTrack:
+Select: Track={{ loop.index0 + outer_index0 }} TrackCount=1 Start=0 End=0.5
+Chirp: StartFreq={{ track.start_freq }} EndFreq={{ track.end_freq }} StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    {% endfor %}
+Select: Track={{ outer_index0 }} TrackCount={{ iteration.chirps|length }}
+# End sequence {{ iteration.mixed_track }}, Destination Output Track   --------
+{% endfor %}

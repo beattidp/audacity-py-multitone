@@ -1,20 +1,28 @@
 {
     "tone_data": [ 
         {
-            "track": 0,
-            "frequencies": [
+            "mixed_track": 0,
+            "chirps": [
                 {
-                    "f1": 800,
-                    "f2": 900
+                    "start_freq": 800,
+                    "end_freq": 900
+                },
+                {
+                    "start_freq": 1000,
+                    "end_freq": 1100
                 }
             ]
         },
         {
-            "track": 1,
-            "frequencies": [
+            "mixed_track": 1,
+            "chirps": [
                 {
-                    "f1": 1000,
-                    "f2": 1100
+                    "start_freq": 1200,
+                    "end_freq": 1300
+                },
+                {
+                    "start_freq": 1400,
+                    "end_freq": 1500
                 }
             ]
         }
