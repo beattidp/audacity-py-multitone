@@ -7,7 +7,10 @@ from pprint import pprint
 import json
 from jinja2 import Environment, FileSystemLoader
 import time
+from datetime import datetime
 
+''' render jinja2 template and feed result to Audacity scripting socket interface
+'''
 REGEX_COMMENT = "$|^#.*"
 
 timeout = 10 # seconds
@@ -29,28 +32,42 @@ def do_expand_template():
         print(output,file=oupfile)
     print(output,file=sys.stderr)
 
-def run_scripted():
-    with open('expanded_template.txt','r') as inpfile:
-        while buffer := inpfile.readline():
+def do_parse_template():
+    with open(oupfile_name,'r') as inpfile:
+        while len(buffer := inpfile.readline()):
+            buffer_item = buffer.strip()
             reply = ''
             if re.match(REGEX_COMMENT,buffer):
                 print(f'COMMENT: {buffer}',file=sys.stderr)
             else:
-                script_commands.append(buffer.strip())
-                message = buffer.strip()
-                print(f'COMMAND: {message}',file=sys.stderr)
-                start = time.time()
-                client.write(message)
-                while reply == '':
-                    time.sleep(0.1)  # allow time for reply
-                    if time.time() - start > timeout:
-                        reply = 'PipeClient: Reply timed-out.'
-                    else:
-                        reply = client.read()
-                print(f'RESPONSE: {reply}',file=sys.stderr)
-                if not reply.endswith('OK'):
-                    break
+                if len(buffer_item):
+                    script_commands.append(buffer_item)
+
+def run_scripted(commands):
+    print(f'number of commands: {len(commands)}')
+    for message in commands:
+        reply = ''
+        print(f'COMMAND: {message}',file=sys.stderr)
+        start = time.time()
+        client.write(message)
+        while reply == '':
+            time.sleep(0.1)  # allow time for reply
+            if time.time() - start > timeout:
+                reply = 'PipeClient: Reply timed-out.'
+            else:
+                reply = client.read()
+        print(f'RESPONSE: {reply}',file=sys.stderr)
+        if not reply.split('\n')[0].endswith('OK'):
+            break
+        time.sleep(0.2)
+
 
 if __name__ == "__main__":
+    timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+    print(f'{timestamp} -- Begin Execution --------------------', file=sys.stderr)
     do_expand_template()
-    run_scripted()
+    do_parse_template()
+    #from pprint import pprint as pp
+    #pp(script_commands)
+
+    run_scripted(script_commands)
