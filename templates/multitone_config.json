@@ -2,27 +2,37 @@
     "tone_data": [ 
         {
             "mixed_track": 0,
+            "duration": 2.5,
             "chirps": [
                 {
-                    "start_freq": 800,
-                    "end_freq": 900
+                    "start_freq": 636,
+                    "end_freq": 636
                 },
                 {
-                    "start_freq": 1000,
-                    "end_freq": 1100
+                    "start_freq": 651,
+                    "end_freq": 651
+                },
+                {
+                    "start_freq": 3366,
+                    "end_freq": 3366
                 }
             ]
         },
         {
             "mixed_track": 1,
+            "duration": 2.5,
             "chirps": [
                 {
-                    "start_freq": 1200,
-                    "end_freq": 1300
+                    "start_freq": 636,
+                    "end_freq": 636
                 },
                 {
-                    "start_freq": 1400,
-                    "end_freq": 1500
+                    "start_freq": 651,
+                    "end_freq": 651
+                },
+                {
+                    "start_freq": 3366,
+                    "end_freq": 3366
                 }
             ]
         }
