@@ -12,7 +12,7 @@ from datetime import datetime
 ''' render jinja2 template and feed result to Audacity scripting socket interface
 '''
 REGEX_COMMENT = "$|^#.*"
-
+RETRIES_ALLOWED = 3
 timeout = 10 # seconds
 client = PipeClient()
 inpfile = sys.stdin
@@ -47,19 +47,25 @@ def run_scripted(commands):
     print(f'number of commands: {len(commands)}')
     for message in commands:
         reply = ''
+        retry_count = 0
         print(f'COMMAND: {message}',file=sys.stderr)
         start = time.time()
         client.write(message)
         while reply == '':
             time.sleep(0.1)  # allow time for reply
             if time.time() - start > timeout:
-                reply = 'PipeClient: Reply timed-out.'
+                retry_count += 1
+                if retry_count < RETRIES_ALLOWED:
+                    print(f'RETRY TIMEOUT #{retry_count}',file=sys.stderr)
+                    client.write(message)
+                    continue
             else:
                 reply = client.read()
         print(f'RESPONSE: {reply}',file=sys.stderr)
-        if not reply.split('\n')[0].endswith('OK'):
+        reply_lines = reply.split('\n')
+        if not reply_lines[len(reply_lines)-2].endswith('OK'):
             break
-        time.sleep(0.2)
+        #time.sleep(1.0)
 
 
 if __name__ == "__main__":
