@@ -1,0 +1,42 @@
+
+
+# Begin sequence 0, Destination Output Track --------
+    
+NewMonoTrack:
+Select: Track=0 TrackCount=1 Start=0 End=2.5
+Chirp: StartFreq=636 EndFreq=636 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    
+NewMonoTrack:
+Select: Track=1 TrackCount=1 Start=0 End=2.5
+Chirp: StartFreq=651 EndFreq=651 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    
+NewMonoTrack:
+Select: Track=2 TrackCount=1 Start=0 End=2.5
+Chirp: StartFreq=3366 EndFreq=3366 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    
+Select: Track=0 TrackCount=3
+MixAndRender:
+Export2: Filename="../aex/mixed-0.ogg"
+RemoveTracks:
+# End sequence 0, Destination Output Track   --------
+
+# Begin sequence 1, Destination Output Track --------
+    
+NewMonoTrack:
+Select: Track=1 TrackCount=1 Start=0 End=2.5
+Chirp: StartFreq=636 EndFreq=636 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    
+NewMonoTrack:
+Select: Track=2 TrackCount=1 Start=0 End=2.5
+Chirp: StartFreq=651 EndFreq=651 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    
+NewMonoTrack:
+Select: Track=3 TrackCount=1 Start=0 End=2.5
+Chirp: StartFreq=3366 EndFreq=3366 StartAmp=0.8 EndAmp=0.8 Waveform=Sine Interpolation=Linear
+    
+Select: Track=1 TrackCount=3
+MixAndRender:
+Export2: Filename="../aex/mixed-1.ogg"
+RemoveTracks:
+# End sequence 1, Destination Output Track   --------
+
