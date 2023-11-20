@@ -1,38 +1,46 @@
 {
     "tone_data": [ 
         {
-            "mixed_track": 0,
-            "duration": 2.5,
+            "mixed_track": "c-maj",
+            "duration": 1.5,
             "chirps": [
                 {
-                    "start_freq": 636,
-                    "end_freq": 636
+                    "start_freq": 329.628,
+                    "end_freq": 329.628
                 },
                 {
-                    "start_freq": 651,
-                    "end_freq": 651
+                    "start_freq": 391.995,
+                    "end_freq": 391.995
                 },
                 {
-                    "start_freq": 3366,
-                    "end_freq": 3366
+                    "start_freq": 523.251,
+                    "end_freq": 523.251
                 }
             ]
         },
         {
-            "mixed_track": 1,
-            "duration": 2.5,
+            "mixed_track": "e7-9th",
+            "duration": 0.5,
             "chirps": [
                 {
-                    "start_freq": 636,
-                    "end_freq": 636
+                    "start_freq": 2637.00,
+                    "end_freq": 2637.00
                 },
                 {
-                    "start_freq": 651,
-                    "end_freq": 651
+                    "start_freq": 3322.41,
+                    "end_freq": 3322.41
                 },
                 {
-                    "start_freq": 3366,
-                    "end_freq": 3366
+                    "start_freq": 4698.40,
+                    "end_freq": 4698.40
+                },
+                {
+                    "start_freq": 3951.00,
+                    "end_freq": 3951.00
+                },
+                {
+                    "start_freq": 5274.00,
+                    "end_freq": 5274.00
                 }
             ]
         }
